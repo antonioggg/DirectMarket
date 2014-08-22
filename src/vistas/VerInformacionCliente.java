@@ -6,19 +6,42 @@
 
 package vistas;
 
+
+import Logica.CtrlUsuario;
+import java.util.LinkedList;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author Admin
  */
 public class VerInformacionCliente extends javax.swing.JPanel {
-
+        CtrlUsuario crtlc = new CtrlUsuario();
+        LinkedList<Object> Cliente= new LinkedList();
+        DefaultTableModel datos;
+        
     /**
      * Creates new form VerInformacionCliente
      */
     public VerInformacionCliente() {
         initComponents();
+        
     }
-
+    void cargarperfil(){
+    String[] titulos={"Nick","email"};
+    String[] registros=new String[2];
+    
+    datos= new DefaultTableModel(null, titulos);
+    
+        
+  
+        for (int i=0;i<crtlc.listarUsuarios().size();i++) {
+           
+            registros[0]= crtlc.listarUsuarios().get(i).getTipo();
+            datos.addRow(registros);
+    }
+        jTable1.setModel(datos);
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -54,7 +77,15 @@ public class VerInformacionCliente extends javax.swing.JPanel {
             new String [] {
                 "Title 1", "Title 2"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jScrollPane1.setViewportView(jTable1);
 
         jLabel1.setFont(new java.awt.Font("Verdana", 1, 12)); // NOI18N

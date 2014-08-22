@@ -2,6 +2,7 @@
 package Logica;
 
 import conexion.*;
+import java.util.LinkedList;
 
 //@author Francis
 
@@ -23,6 +24,12 @@ public class CtrlUsuario {
     
     public void guardarCliente(Cliente cli){
     gu.guardarCliente(cli);
+    }
+
+    public LinkedList<Cliente> listarUsuarios(){
+        listar lis = new listar();
+        LinkedList<Cliente> clientes = lis.getCliente();
+        return clientes;
     }
     
 }

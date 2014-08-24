@@ -7,7 +7,9 @@
 package vistas;
 
 import Logica.CtrlUsuario;
+import java.net.URL;
 import java.util.LinkedList;
+import javax.swing.ImageIcon;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -37,6 +39,16 @@ public class verinfcliente extends javax.swing.JFrame {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        nombre = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
+        email = new javax.swing.JTextField();
+        Jlabel3 = new javax.swing.JLabel();
+        Label4 = new javax.swing.JLabel();
+        apellido = new javax.swing.JTextField();
+        fecha = new javax.swing.JTextField();
+        imagencli = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -48,27 +60,104 @@ public class verinfcliente extends javax.swing.JFrame {
 
             }
         ));
+        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable1MouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTable1);
+
+        jLabel1.setText("Información Cliente");
+
+        jLabel2.setFont(new java.awt.Font("Verdana", 1, 10)); // NOI18N
+        jLabel2.setText("Nombre");
+
+        jLabel3.setText("Email");
+
+        Jlabel3.setText("Apellido");
+
+        Label4.setText("Fecha de Nacimiento");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 343, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(47, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(180, 180, 180)
+                        .addComponent(jLabel1))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(24, 24, 24)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 523, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(apellido, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 253, Short.MAX_VALUE)
+                                    .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(Jlabel3, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(nombre, javax.swing.GroupLayout.Alignment.LEADING))
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(email)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel3)
+                                            .addComponent(Label4))
+                                        .addGap(0, 0, Short.MAX_VALUE))
+                                    .addComponent(fecha)))
+                            .addComponent(imagencli, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(31, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(25, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(191, 191, 191))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(8, 8, 8)
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel3))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(nombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(email, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(Jlabel3)
+                    .addComponent(Label4))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(apellido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(fecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(imagencli, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(37, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
+        // Cuando se cliquea el jtable
+        int i =jTable1.getSelectedRow(); 
+        String nomb= crtlc.listarUsuarios().get(i).getNombre();
+        String email= crtlc.listarUsuarios().get(i).getE_mail();
+        String apellido= crtlc.listarUsuarios().get(i).getApellido();
+        String fecha= crtlc.listarUsuarios().get(i).getFechanac();
+        String imagen= crtlc.listarUsuarios().get(i).getImagen();
+        
+        this.nombre.setText(nomb); 
+        this.email.setText(email);
+        this.apellido.setText(apellido);
+        this.fecha.setText(fecha);
+        String path = "C:/Users/yo/Documents/NetBeansProjects/DirectMarket/src/imagenes/"+imagen+"";  
+        ImageIcon icon = new ImageIcon(path);  
+        this.imagencli.setIcon(icon);  
+       
+    }//GEN-LAST:event_jTable1MouseClicked
 
     /**
      * @param args the command line arguments
@@ -121,7 +210,17 @@ void cargarcliente(){
         jTable1.setModel(datos);
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel Jlabel3;
+    private javax.swing.JLabel Label4;
+    private javax.swing.JTextField apellido;
+    private javax.swing.JTextField email;
+    private javax.swing.JTextField fecha;
+    private javax.swing.JLabel imagencli;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
+    private javax.swing.JTextField nombre;
     // End of variables declaration//GEN-END:variables
 }

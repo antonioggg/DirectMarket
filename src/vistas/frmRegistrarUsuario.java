@@ -5,7 +5,9 @@
  */
 
 package vistas;
-import Logica.*;
+import Logica.Cliente;
+import Logica.CtrlUsuario;
+import Logica.Proveedor;
 import java.awt.Image;
 import java.io.File;
 import java.io.FileInputStream;

@@ -9,10 +9,9 @@ public class Cliente extends Usuario {
         nombre=null;
         apellido=null;        
         email=null;
-      
-         tipo=null;
-    fechanac=null;
-    imagen=null;
+        tipo=null;
+        fechanac=null;
+        imagen=null;
                
      
      }

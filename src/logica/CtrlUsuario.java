@@ -31,5 +31,12 @@ public class CtrlUsuario {
         LinkedList<Cliente> clientes = lis.getCliente();
         return clientes;
     }
+
+    public LinkedList<Proveedor> listarProveedor() {
+        listar lis = new listar();
+        LinkedList<Proveedor> proveedores = lis.getProveedor();
+        return proveedores;
+        
+    }
     
 }

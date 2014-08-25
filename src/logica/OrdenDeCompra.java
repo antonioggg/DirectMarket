@@ -4,19 +4,29 @@ package Logica;
 //@author Francis
 
 public class OrdenDeCompra {
+
+    public OrdenDeCompra() {
+      
+    }
+
+    public OrdenDeCompra(Integer numero) {
+        this.numero = numero;
+    }
+    
     
     //Atributos
     private double preciototal;
     private Integer numero;
     private DataFecha fecha;
-    
-    
-     //Funciones 
-    public OrdenDeCompra(){
-        preciototal = new Double(null);
-        numero = new Integer(0); 
-        fecha = new DataFecha();       
+
+    public OrdenDeCompra(double preciototal, Integer numero, DataFecha fecha) {
+        this.preciototal = preciototal;
+        this.numero = numero;
+        this.fecha = fecha;
     }
+    
+    
+
     
     public void setOrdenDeCompra(double pt,int n, DataFecha f){
         preciototal = pt;

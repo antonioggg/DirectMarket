@@ -7,6 +7,8 @@
 package conexion;
 
 import Logica.Cliente;
+import Logica.OrdenDeCompra;
+import Logica.Proveedor;
 import java.sql.ResultSet;
 import java.util.LinkedList;
 import java.util.logging.Level;
@@ -40,5 +42,52 @@ public class listar {
         }
         return listaClientes;
     }
-    
+    public LinkedList<OrdenDeCompra> getCompras(String nick) {
+        
+        LinkedList<OrdenDeCompra> listaCompras =new LinkedList<>();
+        conexion.conectar bd=new conexion.conectar();
+        String sql="";
+        bd.conectarBase();
+        sql="SELECT * FROM ordencompra WHERE cliente='"+nick+"'";
+        try (ResultSet rs = bd.sentencia.executeQuery(sql)){
+           
+                while (rs.next()) {
+                    
+                    Integer numero = rs.getInt("numero");
+                    System.out.print(numero);
+                    OrdenDeCompra comp = new OrdenDeCompra(numero);
+                    
+                    listaCompras.add(comp);
+                }
+         
+            bd.desconectarBaseDeDatos();
+        }
+        catch (Exception e){
+            Logger.getLogger(buscar.class.getName()).log(Level.SEVERE, null, e);
+        }
+        return listaCompras;
+    }
+
+    public LinkedList<Proveedor> getProveedor() {
+        LinkedList<Proveedor> listaProveedores = new LinkedList<>();
+        conexion.conectar bd=new conexion.conectar();
+        
+        bd.conectarBase();
+        String sql="SELECT * FROM usuarios where tipo ='proveedor'";
+        try (ResultSet rs = bd.sentencia.executeQuery(sql)){
+           
+                while (rs.next()) {
+                    Proveedor prov = new Proveedor();
+                    prov.setDatos(rs.getString("nick"), rs.getString("nombre"), rs.getString("apellido"), rs.getString("fechanac"), rs.getString("imagen"), rs.getString("tipo"), rs.getString("email"),rs.getString("nomcompania"), rs.getString("linkcompania"));
+                    
+                    listaProveedores.add(prov);
+                }
+         
+            bd.desconectarBaseDeDatos();
+        }
+        catch (Exception e){
+            Logger.getLogger(buscar.class.getName()).log(Level.SEVERE, null, e);
+        }
+        return listaProveedores;
+    }
 }

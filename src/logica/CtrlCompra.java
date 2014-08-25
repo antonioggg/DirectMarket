@@ -5,6 +5,7 @@ package Logica;
 
 import conexion.*;
 import java.sql.ResultSet;
+import java.util.LinkedList;
 
 
 public class CtrlCompra {
@@ -22,6 +23,13 @@ public class CtrlCompra {
     public void borrarCompras(int b){
     bo.borrarCompras(b);
     }
-    
+
+
+
+    public LinkedList<OrdenDeCompra>  listarOrdenesCompras(String nick) {
+       listar lis = new listar();
+       LinkedList<OrdenDeCompra> Compras = lis.getCompras(nick);
+       return Compras;
+    }
     
 }

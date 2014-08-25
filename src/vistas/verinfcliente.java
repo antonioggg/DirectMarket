@@ -8,6 +8,7 @@ package vistas;
 
 import Logica.CtrlCompra;
 import Logica.CtrlUsuario;
+import Logica.OrdenDeCompra;
 import java.net.URL;
 import java.util.LinkedList;
 import javax.swing.ImageIcon;
@@ -21,7 +22,7 @@ public class verinfcliente extends javax.swing.JFrame {
         CtrlUsuario crtlc = new CtrlUsuario();
         CtrlCompra ctrlcomp = new CtrlCompra();
         LinkedList<Object> Cliente= new LinkedList();
-        LinkedList<Object> ordenCompra= new LinkedList();
+        LinkedList<OrdenDeCompra> ordenCompra= new LinkedList();
         DefaultTableModel datos;
         DefaultTableModel compras;
     /**
@@ -264,8 +265,9 @@ void cargarcliente(){
         compras = new DefaultTableModel(null, titulos);
         String[] registros=new String[1];
         String nick= crtlc.listarUsuarios().get(i).getNick();
-        for (int j=0;j<ctrlcomp.listarOrdenesCompras(nick).size();j++) {
-            String numero = Integer.toString(ctrlcomp.listarOrdenesCompras(nick).get(i).getNumero());
+        ordenCompra = ctrlcomp.listarOrdenesCompras(nick);
+        for (int j=0;j<ordenCompra.size();j++) {
+            String numero = Integer.toString(ordenCompra.get(j).getNumero());
             registros[0]= numero;
             
             compras.addRow(registros);

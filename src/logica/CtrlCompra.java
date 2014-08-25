@@ -29,7 +29,9 @@ public class CtrlCompra {
     public LinkedList<OrdenDeCompra>  listarOrdenesCompras(String nick) {
        listar lis = new listar();
        LinkedList<OrdenDeCompra> Compras = lis.getCompras(nick);
+       System.out.print("Lista compras creada");
        return Compras;
+       
     }
     
 }

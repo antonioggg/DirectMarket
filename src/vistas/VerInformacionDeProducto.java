@@ -14,7 +14,7 @@ public class VerInformacionDeProducto extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        Celulares = new javax.swing.JTree();
+        catArbol = new javax.swing.JTree();
         Seleccionar = new javax.swing.JButton();
         Cancelar = new javax.swing.JButton();
         Categorias = new javax.swing.JLabel();
@@ -22,12 +22,10 @@ public class VerInformacionDeProducto extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Listar categorías");
 
-        jPanel1.setBackground(new java.awt.Color(204, 255, 204));
-        jPanel1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, null, new java.awt.Color(0, 102, 51), null, null));
+        jPanel1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
-        jScrollPane1.setViewportView(Celulares);
+        jScrollPane1.setViewportView(catArbol);
 
-        Seleccionar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/Seleccionar.png"))); // NOI18N
         Seleccionar.setText("Seleccionar");
         Seleccionar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -35,7 +33,6 @@ public class VerInformacionDeProducto extends javax.swing.JFrame {
             }
         });
 
-        Cancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/Cancelar.png"))); // NOI18N
         Cancelar.setText("Cancelar");
         Cancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -144,8 +141,8 @@ public class VerInformacionDeProducto extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Cancelar;
     private javax.swing.JLabel Categorias;
-    private javax.swing.JTree Celulares;
     private javax.swing.JButton Seleccionar;
+    private javax.swing.JTree catArbol;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables

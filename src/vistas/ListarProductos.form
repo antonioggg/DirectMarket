@@ -44,14 +44,9 @@
   <SubComponents>
     <Container class="javax.swing.JPanel" name="jPanel1">
       <Properties>
-        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="cc" green="ff" red="cc" type="rgb"/>
-        </Property>
         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
           <Border info="org.netbeans.modules.form.compat2.border.BevelBorderInfo">
-            <BevelBorder>
-              <Color PropertyName="highlightInner" blue="33" green="66" red="0" type="rgb"/>
-            </BevelBorder>
+            <BevelBorder/>
           </Border>
         </Property>
       </Properties>
@@ -130,9 +125,6 @@
         </Container>
         <Component class="javax.swing.JButton" name="VerInformacion">
           <Properties>
-            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/Iconos/ver.png"/>
-            </Property>
             <Property name="text" type="java.lang.String" value="Ver informaci&#xf3;n"/>
           </Properties>
           <Events>
@@ -141,9 +133,6 @@
         </Component>
         <Component class="javax.swing.JButton" name="Cancelar">
           <Properties>
-            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/Iconos/Cancelar.png"/>
-            </Property>
             <Property name="text" type="java.lang.String" value="Cancelar"/>
           </Properties>
           <Events>
@@ -152,9 +141,6 @@
         </Component>
         <Component class="javax.swing.JButton" name="Modificar">
           <Properties>
-            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/Iconos/modificar.jpg"/>
-            </Property>
             <Property name="text" type="java.lang.String" value="Modificar"/>
           </Properties>
           <Events>

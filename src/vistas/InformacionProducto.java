@@ -32,8 +32,7 @@ public class InformacionProducto extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Información del producto");
 
-        jPanel1.setBackground(new java.awt.Color(204, 255, 204));
-        jPanel1.setBorder(javax.swing.BorderFactory.createBevelBorder(0, null, new java.awt.Color(0, 102, 51), null, null));
+        jPanel1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         jScrollPane1.setViewportView(jTextPane1);
 

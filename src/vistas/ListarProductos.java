@@ -25,8 +25,7 @@ public class ListarProductos extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Listar Productos");
 
-        jPanel1.setBackground(new java.awt.Color(204, 255, 204));
-        jPanel1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, null, new java.awt.Color(0, 102, 51), null, null));
+        jPanel1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         Productos.setText("Productos");
 
@@ -43,7 +42,6 @@ public class ListarProductos extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(jTable1);
 
-        VerInformacion.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/ver.png"))); // NOI18N
         VerInformacion.setText("Ver información");
         VerInformacion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -51,7 +49,6 @@ public class ListarProductos extends javax.swing.JFrame {
             }
         });
 
-        Cancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/Cancelar.png"))); // NOI18N
         Cancelar.setText("Cancelar");
         Cancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -59,7 +56,6 @@ public class ListarProductos extends javax.swing.JFrame {
             }
         });
 
-        Modificar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/modificar.jpg"))); // NOI18N
         Modificar.setText("Modificar");
         Modificar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

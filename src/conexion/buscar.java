@@ -8,6 +8,7 @@ package conexion;
 import Logica.*;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -107,5 +108,42 @@ public class buscar {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
       
-
+ public ArrayList<CatPadre> categoriaPadre(){
+           
+           bd.conectarBase();
+           ArrayList<CatPadre> cate = new ArrayList<CatPadre>();
+          sql="SELECT * FROM categoria WHERE padre=''";
+        try {
+            bd.resultado=bd.sentencia.executeQuery(sql);
+            while(bd.resultado.next()){
+           CatPadre cat=new CatPadre();
+           cat.setNombre(bd.resultado.getString("nombre"));
+           System.out.print(bd.resultado.getString("nombre"));
+           cate.add(cat);
+           
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(buscar.class.getName()).log(Level.SEVERE, null, ex);
+        }
+           
+         return cate; 
+       }
+       
+        public ArrayList<CatHija> categoriasHijas(String pad){
+           ArrayList<CatHija> categ = new ArrayList<CatHija>();
+          bd.conectarBase();
+          sql="SELECT * FROM categoria WHERE padre='"+pad+"'"; 
+        try {
+            bd.resultado=bd.sentencia.executeQuery(sql);
+            while(bd.resultado.next()){
+           CatHija cat=new CatHija();
+           cat.setNombre(bd.resultado.getString("nombre"));
+           categ.add(cat);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(buscar.class.getName()).log(Level.SEVERE, null, ex);
+        }
+           
+         return categ;  
+       }
 }

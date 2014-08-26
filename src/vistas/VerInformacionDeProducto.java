@@ -1,14 +1,55 @@
 
 package Vistas;
 
+import Logica.CatHija;
+import Logica.CatPadre;
+import conexion.buscar;
+import java.util.ArrayList;
+import javax.swing.tree.DefaultMutableTreeNode;
+import javax.swing.tree.DefaultTreeModel;
+
 public class VerInformacionDeProducto extends javax.swing.JFrame {
+    
+    buscar bu = new buscar();    
+    DefaultTreeModel arbol_categorias;
+    DefaultMutableTreeNode root = new DefaultMutableTreeNode("Categorias");
 
     public VerInformacionDeProducto() {
         initComponents();
+        cargarCategorias();
         
         this.setLocationRelativeTo(null);
     }
-
+    
+    public void cargarCategorias() {
+        ArrayList<CatPadre> cate = bu.categoriaPadre();
+        for (CatPadre Categ:cate) {
+            DefaultMutableTreeNode cat = new DefaultMutableTreeNode();
+            String nom = Categ.getNombre();
+            cat.setUserObject(Categ);
+            root.add(cat);
+            traerCategoriasHijas(cat, nom);
+            }
+        arbol_categorias = new DefaultTreeModel(root);
+        catArbol.setModel(arbol_categorias);
+        catArbol.setVisible(true);
+    }
+    
+    public void traerCategoriasHijas(DefaultMutableTreeNode nodo, String pad){
+        ArrayList<CatHija> catego = bu.categoriasHijas(pad); 
+        if(catego.size()>0){
+            for(CatHija Ca: catego){
+            String padr = Ca.getNombre();
+            DefaultMutableTreeNode com = new DefaultMutableTreeNode();
+            com.setUserObject(Ca);
+            nodo.add(com);
+            traerCategoriasHijas(com, padr);
+            }
+        }
+    }                                                                       
+   
+    
+ @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
@@ -95,7 +136,6 @@ public class VerInformacionDeProducto extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void SeleccionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SeleccionarActionPerformed
-        //Para que al seleccionar me liste los productos en una nueva ventana
         ListarProductos lp = new ListarProductos();
         lp.setVisible(true);
         this.dispose();

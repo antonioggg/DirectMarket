@@ -1,10 +1,30 @@
 
 package Vistas;
 
+import java.awt.Image;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.util.StringTokenizer;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
+import javax.swing.JFileChooser;
+
 public class ModificarProducto extends javax.swing.JFrame {
+    
+    int longitudBytes;
+    FileInputStream fis;
 
     public ModificarProducto() {
         initComponents();
+        RutaImagen.setVisible(false);
+        imagen.setVisible(false);
         
         this.setLocationRelativeTo(null);
     }
@@ -19,9 +39,6 @@ public class ModificarProducto extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
-        AdjuntarImagen = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -31,6 +48,9 @@ public class ModificarProducto extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         jTextField3 = new javax.swing.JTextField();
         Modificar = new javax.swing.JButton();
+        ImagenProd = new javax.swing.JLabel();
+        imagen = new javax.swing.JLabel();
+        RutaImagen = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -46,12 +66,6 @@ public class ModificarProducto extends javax.swing.JFrame {
         setTitle("Modificar datos de producto");
 
         jPanel1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane1.setViewportView(jTextArea1);
-
-        AdjuntarImagen.setText("Adjuntar Imagen");
 
         jLabel1.setFont(new java.awt.Font("Verdana", 1, 12)); // NOI18N
         jLabel1.setText("Especificación del producto");
@@ -72,6 +86,18 @@ public class ModificarProducto extends javax.swing.JFrame {
 
         Modificar.setText("Modificar");
 
+        ImagenProd.setText("Adjuntar Imagen");
+        ImagenProd.setBorder(javax.swing.BorderFactory.createTitledBorder("Imagen"));
+        ImagenProd.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                ImagenProdMouseClicked(evt);
+            }
+        });
+
+        imagen.setText("jLabel8");
+
+        RutaImagen.setText("jLabel7");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -80,18 +106,15 @@ public class ModificarProducto extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(AdjuntarImagen)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(137, 137, 137)
-                                .addComponent(jLabel1))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(91, 91, 91)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(Modificar)
+                                .addComponent(ImagenProd, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addGap(174, 174, 174)
+                                        .addComponent(jLabel1))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                        .addGap(73, 73, 73)
                                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addComponent(jLabel3)
                                             .addComponent(jLabel4)
@@ -101,16 +124,23 @@ public class ModificarProducto extends javax.swing.JFrame {
                                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                                 .addComponent(jTextField3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 59, Short.MAX_VALUE)
                                                 .addComponent(jTextField2, javax.swing.GroupLayout.Alignment.LEADING))
-                                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)))))))
-                    .addComponent(jLabel2))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(imagen)
+                                .addGap(42, 42, 42)
+                                .addComponent(RutaImagen)))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(Modificar)
+                        .addGap(100, 100, 100))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addGap(34, 34, 34)
@@ -121,18 +151,20 @@ public class ModificarProducto extends javax.swing.JFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel4))
-                        .addGap(13, 13, 13)
+                        .addGap(19, 19, 19)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel5)
-                            .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(AdjuntarImagen)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel2))
-                    .addComponent(Modificar))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(ImagenProd, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(imagen)
+                    .addComponent(RutaImagen))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(Modificar)
+                    .addComponent(jLabel2))
+                .addGap(27, 27, 27))
         );
 
         jPanel2.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -175,7 +207,7 @@ public class ModificarProducto extends javax.swing.JFrame {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap(79, Short.MAX_VALUE)
+                .addContainerGap(87, Short.MAX_VALUE)
                 .addComponent(jLabel6)
                 .addGap(58, 58, 58)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -235,7 +267,7 @@ public class ModificarProducto extends javax.swing.JFrame {
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(20, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -252,6 +284,49 @@ public class ModificarProducto extends javax.swing.JFrame {
     private void CancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CancelarActionPerformed
         this.dispose();
     }//GEN-LAST:event_CancelarActionPerformed
+
+    private void ImagenProdMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ImagenProdMouseClicked
+        JFileChooser se = new JFileChooser("C:\\Documents and Settings\\Administrador\\Mis documentos\\Mis imágenes");
+        se.setFileSelectionMode(JFileChooser.FILES_ONLY);
+        int estado = se.showOpenDialog(null);
+        if(estado == JFileChooser.APPROVE_OPTION)
+        {
+           String ruta = se.getSelectedFile().getAbsolutePath();
+           String nombre = se.getSelectedFile().getName();
+           String rutaNueva="E:\\Escritorio\\foto\\"+nombre;
+           RutaImagen.setText(ruta);
+           imagen.setText(nombre);
+           File entrada=new File(CorregirRuta(ruta));
+           File salida=new File(rutaNueva);
+            try {
+                fis =  new FileInputStream(se.getSelectedFile());
+                this.longitudBytes = (int)se.getSelectedFile().length();
+
+                Image icono = ImageIO.read(se.getSelectedFile()).getScaledInstance(ImagenProd.getWidth(), ImagenProd.getHeight(), Image.SCALE_DEFAULT);
+                ImagenProd.setIcon(new ImageIcon(icono));
+                ImagenProd.updateUI();
+                
+                InputStream in = new FileInputStream(entrada);
+                        OutputStream out = new FileOutputStream(salida);
+                                
+                        byte[] buf = new byte[1024];
+                        int len;
+
+                        while ((len = in.read(buf)) > 0) {
+                                out.write(buf, 0, len);
+                        }
+                   
+                        in.close();
+                        out.close();
+                
+
+            } catch (FileNotFoundException ex) {
+                Logger.getLogger(vistas.frmRegistrarUsuario.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (IOException ex) {
+                Logger.getLogger(vistas.frmRegistrarUsuario.class.getName()).log(Level.SEVERE, null, ex);
+            } 
+        }
+    }//GEN-LAST:event_ImagenProdMouseClicked
 
     /**
      * @param args the command line arguments
@@ -290,11 +365,13 @@ public class ModificarProducto extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Aceptar;
-    private javax.swing.JButton AdjuntarImagen;
     private javax.swing.JButton Agregar;
     private javax.swing.JButton Cancelar;
     private javax.swing.JButton Eliminar;
+    private javax.swing.JLabel ImagenProd;
     private javax.swing.JButton Modificar;
+    private javax.swing.JLabel RutaImagen;
+    private javax.swing.JLabel imagen;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -305,12 +382,31 @@ public class ModificarProducto extends javax.swing.JFrame {
     private javax.swing.JList jList2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JTextArea jTextArea1;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
     // End of variables declaration//GEN-END:variables
+
+public String CorregirRuta(String ruta){
+  String separador="\\", nuevoSeparador="\\\\"; 
+         StringTokenizer tokens=new StringTokenizer(ruta, separador);
+         //Para guardar la ruta corregida
+         String rutaCorregida = new String();
+         //Contar los tokens (en este caso las carpetas, contado tambien
+         // el nombre del archivo seleccionado).
+         int noTokens = tokens.countTokens();
+         int i = 1;
+         do
+         {      //Agregar el nuevo separador
+            rutaCorregida += tokens.nextToken()+nuevoSeparador;
+            i++;
+         }while(i<noTokens);
+         //Agregar a la ruta corregida el ultimo token, (nombre del archivo)
+         rutaCorregida += tokens.nextToken();      
+         //Mostrar la ruta corregida en la consola
+         System.out.println(rutaCorregida+"\n"+noTokens+ " tokens");
+         return rutaCorregida;
+    }
 }

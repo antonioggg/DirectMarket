@@ -33,5 +33,14 @@ public class CtrlCompra {
        return Compras;
        
     }
+
+    public ResultSet mostrarcompras(int com) {
+        
+        return bu.mostrarCompras(com);
+    }
+
+    public Productos mostrarPrecioUnitario(String produc) {
+       return bu.mostrarPrecioUnitario(produc);
+    }
     
 }

@@ -32,7 +32,7 @@ public class buscar {
     }
     
     
-     public ResultSet mostrarCompras(int com){
+    public ResultSet mostrarCompras(int com){
     bd.conectarBase();
     sql="SELECT * FROM compras WHERE idorden="+com+"";
         try {
@@ -47,10 +47,10 @@ public class buscar {
     
     
     
-      public Productos mostrarPrecioUnitario(String prod){
+     public Productos mostrarPrecioUnitario(String prod){
           Productos pro =new Productos();
-    bd.conectarBase();
-    sql="SELECT * FROM Productos WHERE referencia='"+prod+"'";
+        bd.conectarBase();
+        sql="SELECT * FROM Productos WHERE referencia='"+prod+"'";
         try {
             bd.resultado=bd.sentencia.executeQuery(sql);
            while(bd.resultado.next()){
@@ -146,4 +146,6 @@ public class buscar {
            
          return categ;  
        }
+      
+    
 }

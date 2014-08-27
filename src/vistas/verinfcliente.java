@@ -190,7 +190,16 @@ public class verinfcliente extends javax.swing.JFrame {
     }//GEN-LAST:event_jTable1MouseClicked
 
     private void jTable2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable2MouseClicked
-        // TODO add your handling code here:
+        //llamar a al funcion mostrar 
+        int j =jTable2.getSelectedRow(); 
+        String value=jTable2.getValueAt(j, 0).toString();
+        System.out.print("valor de la tabla '"+value+"'");
+        int i =Integer.valueOf(value);
+        System.out.print("valor de la tabla '"+i+"'");
+        VerInfCompra obj= new VerInfCompra();
+        obj.mostrarCompras(i);
+        obj.setVisible(true);
+                
     }//GEN-LAST:event_jTable2MouseClicked
 
     /**

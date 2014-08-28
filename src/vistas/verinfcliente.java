@@ -59,6 +59,7 @@ public class verinfcliente extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        jTable1.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -77,15 +78,27 @@ public class verinfcliente extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Verdana", 0, 14)); // NOI18N
         jLabel1.setText("Información Cliente");
 
-        jLabel2.setFont(new java.awt.Font("Verdana", 1, 10)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
         jLabel2.setText("Nombre");
 
+        nombre.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
+
+        jLabel3.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
         jLabel3.setText("Email");
 
+        email.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
+
+        Jlabel3.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
         Jlabel3.setText("Apellido");
 
+        Label4.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
         Label4.setText("Fecha de Nacimiento");
 
+        apellido.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
+
+        fecha.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
+
+        jTable2.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
         jTable2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -123,17 +136,16 @@ public class verinfcliente extends javax.swing.JFrame {
                                         .addComponent(nombre, javax.swing.GroupLayout.Alignment.LEADING))
                                     .addComponent(imagencli, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(18, 18, 18)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(email)
-                                        .addGroup(layout.createSequentialGroup()
-                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                .addComponent(jLabel3)
-                                                .addComponent(Label4))
-                                            .addGap(0, 153, Short.MAX_VALUE))
-                                        .addComponent(fecha))
-                                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 253, javax.swing.GroupLayout.PREFERRED_SIZE))))))
-                .addContainerGap(30, Short.MAX_VALUE))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(email)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel3)
+                                            .addComponent(Label4))
+                                        .addGap(0, 153, Short.MAX_VALUE))
+                                    .addComponent(fecha)
+                                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -163,7 +175,7 @@ public class verinfcliente extends javax.swing.JFrame {
                             .addComponent(fecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(64, Short.MAX_VALUE))
+                .addContainerGap(33, Short.MAX_VALUE))
         );
 
         pack();

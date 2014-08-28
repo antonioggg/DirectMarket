@@ -30,6 +30,8 @@ public class frmRegistrarProductoSeleccionarCat extends javax.swing.JFrame {
     public frmRegistrarProductoSeleccionarCat() {
         initComponents();
         llenarjtree();
+        
+        this.setLocationRelativeTo(null);
     }
 
     public void llenarjtree(){

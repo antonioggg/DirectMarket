@@ -9,6 +9,8 @@ public class NuevaCategoria extends javax.swing.JFrame {
      */
     public NuevaCategoria() {
         initComponents();
+        
+        this.setLocationRelativeTo(null);
     }
 
     /**
@@ -33,6 +35,7 @@ public class NuevaCategoria extends javax.swing.JFrame {
         jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Nueva categoría");
 
         jLabel2.setText("Seleccione Categoria padre");
 

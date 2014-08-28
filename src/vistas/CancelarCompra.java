@@ -23,9 +23,12 @@ buscar bu=new buscar();
 ResultSet rs;
 borrar bo=new borrar();
     DefaultTableModel tabla;
+    
     public CancelarCompra() {
         initComponents();
-          mostrarOrden();
+        mostrarOrden();
+          
+        this.setLocationRelativeTo(null);
     }
 
    public void mostrarOrden(){
@@ -73,6 +76,7 @@ borrar bo=new borrar();
         jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Cancelar compra");
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {

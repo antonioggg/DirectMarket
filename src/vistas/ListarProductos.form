@@ -55,15 +55,16 @@
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" attributes="0">
+                  <EmptySpace pref="15" max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="jScrollPane2" max="32767" attributes="0"/>
-                      <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace pref="15" max="32767" attributes="0"/>
+                      <Component id="jScrollPane2" min="-2" pref="333" max="-2" attributes="0"/>
+                      <Group type="102" attributes="0">
+                          <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
                           <Component id="VerInformacion" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="Modificar" min="-2" pref="107" max="-2" attributes="0"/>
+                          <Component id="Modificar" min="-2" pref="95" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="Cancelar" min="-2" pref="107" max="-2" attributes="0"/>
+                          <Component id="Cancelar" min="-2" pref="95" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
@@ -78,8 +79,8 @@
                   <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="Cancelar" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="VerInformacion" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="Modificar" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="VerInformacion" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace pref="21" max="32767" attributes="0"/>
               </Group>

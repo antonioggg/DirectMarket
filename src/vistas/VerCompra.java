@@ -26,6 +26,8 @@ ResultSet rs;
      */
     public VerCompra() {
         initComponents();
+        
+        this.setLocationRelativeTo(null);
 
     }
 public void mostrarOrden(){
@@ -65,6 +67,7 @@ public void mostrarCompras(int com){
         jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Ver compra");
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {

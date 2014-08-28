@@ -31,6 +31,8 @@ public class verinfcliente extends javax.swing.JFrame {
     public verinfcliente() {
         initComponents();
         cargarcliente();
+        
+         this.setLocationRelativeTo(null);
     }
 
     /**
@@ -58,6 +60,7 @@ public class verinfcliente extends javax.swing.JFrame {
         jTable2 = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Ver información de cliente");
 
         jTable1.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
         jTable1.setModel(new javax.swing.table.DefaultTableModel(

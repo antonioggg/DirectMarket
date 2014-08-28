@@ -19,6 +19,8 @@ public class Menu extends javax.swing.JFrame {
      */
     public Menu() {
         initComponents();
+        
+        this.setLocationRelativeTo(null);
     }
 
     /**
@@ -51,6 +53,7 @@ public class Menu extends javax.swing.JFrame {
         jMenuBar1.add(jMenu2);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Menú");
 
         jMenu3.setText("Sesión");
         jMenu3.addMouseListener(new java.awt.event.MouseAdapter() {

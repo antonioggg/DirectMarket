@@ -1,14 +1,28 @@
 
 package Vistas;
 
+import conexion.buscar;
+import java.sql.ResultSet;
+import javax.swing.DefaultListModel;
+
 public class ListarProductos extends javax.swing.JFrame {
+    
+    buscar bu = new buscar();
+    ResultSet rs;
+    DefaultListModel modeloLista = new DefaultListModel();
+    
 
    public ListarProductos() {
         initComponents();
+        ProductosCategoria();
         
         this.setLocationRelativeTo(null);
     }
 
+   public void ProductosCategoria() {
+       jList1.setModel(modeloLista);
+       rs = bu.ProductosPorCategoria("nombre");
+   }
    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -59,15 +73,16 @@ public class ListarProductos extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap(15, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane2)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 333, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap(15, Short.MAX_VALUE)
+                        .addGap(24, 24, 24)
                         .addComponent(VerInformacion)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(Modificar, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(Modificar, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(Cancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(Cancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -78,8 +93,8 @@ public class ListarProductos extends javax.swing.JFrame {
                 .addGap(37, 37, 37)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Cancelar)
-                    .addComponent(VerInformacion)
-                    .addComponent(Modificar))
+                    .addComponent(Modificar)
+                    .addComponent(VerInformacion))
                 .addContainerGap(21, Short.MAX_VALUE))
         );
 

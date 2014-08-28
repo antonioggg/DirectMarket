@@ -5,14 +5,17 @@ import Logica.CatHija;
 import Logica.CatPadre;
 import conexion.buscar;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
+import javax.swing.tree.TreePath;
 
 public class VerInformacionDeProducto extends javax.swing.JFrame {
     
     buscar bu = new buscar();    
     DefaultTreeModel arbol_categorias;
     DefaultMutableTreeNode root = new DefaultMutableTreeNode("Categorias");
+    
 
     public VerInformacionDeProducto() {
         initComponents();
@@ -56,23 +59,19 @@ public class VerInformacionDeProducto extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         catArbol = new javax.swing.JTree();
-        Seleccionar = new javax.swing.JButton();
         Cancelar = new javax.swing.JButton();
-        Categorias = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Listar categorías");
 
         jPanel1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
-        jScrollPane1.setViewportView(catArbol);
-
-        Seleccionar.setText("Seleccionar");
-        Seleccionar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                SeleccionarActionPerformed(evt);
+        catArbol.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                catArbolMouseClicked(evt);
             }
         });
+        jScrollPane1.setViewportView(catArbol);
 
         Cancelar.setText("Cancelar");
         Cancelar.addActionListener(new java.awt.event.ActionListener() {
@@ -80,8 +79,6 @@ public class VerInformacionDeProducto extends javax.swing.JFrame {
                 CancelarActionPerformed(evt);
             }
         });
-
-        Categorias.setText("Categorías");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -91,27 +88,16 @@ public class VerInformacionDeProducto extends javax.swing.JFrame {
                 .addContainerGap(14, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 258, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(Seleccionar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(Cancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(Cancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(20, 20, 20))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(119, 119, 119)
-                .addComponent(Categorias)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(Categorias)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(22, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(Seleccionar)
-                    .addComponent(Cancelar))
+                .addComponent(Cancelar)
                 .addGap(25, 25, 25))
         );
 
@@ -135,15 +121,20 @@ public class VerInformacionDeProducto extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void SeleccionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SeleccionarActionPerformed
-        ListarProductos lp = new ListarProductos();
-        lp.setVisible(true);
-        this.dispose();
-    }//GEN-LAST:event_SeleccionarActionPerformed
-
     private void CancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CancelarActionPerformed
        this.dispose();
     }//GEN-LAST:event_CancelarActionPerformed
+
+    private void catArbolMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_catArbolMouseClicked
+        DefaultMutableTreeNode root = null;
+        TreePath parentPath = catArbol.getAnchorSelectionPath();
+        root = (DefaultMutableTreeNode) (parentPath.getLastPathComponent());
+        if (root.isLeaf()) {
+             ListarProductos lp = new ListarProductos();
+             lp.setVisible(true);
+             this.dispose();
+             }
+    }//GEN-LAST:event_catArbolMouseClicked
 
     
     public static void main(String args[]) {
@@ -180,8 +171,6 @@ public class VerInformacionDeProducto extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Cancelar;
-    private javax.swing.JLabel Categorias;
-    private javax.swing.JButton Seleccionar;
     private javax.swing.JTree catArbol;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;

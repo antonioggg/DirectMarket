@@ -147,5 +147,17 @@ public class buscar {
          return categ;  
        }
       
+  //muestras los productos de una determinada categoria
+       public ResultSet ProductosPorCategoria(String nombre){
+        bd.conectarBase();
+        sql = "SELECT DISTINCT Productos.nombre FROM Productos, categoriaproducto, categoria" +
+                "WHERE idcategoria = " +nombre+ " AND categoriaproducto.refproducto = Productos.referencia";
+            try {
+            bd.resultado=bd.sentencia.executeQuery(sql);
+         } catch (SQLException ex) {
+            Logger.getLogger(buscar.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    return bd.resultado;
     
+    }  
 }

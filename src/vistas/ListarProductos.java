@@ -17,18 +17,14 @@ public class ListarProductos extends javax.swing.JFrame {
     ResultSet rs;
     CtrlProductos ctrlp = new CtrlProductos();
     ArrayList Catprod = new ArrayList();
-    DefaultListModel listaProd = new DefaultListModel();
-    
-    private int refprod;
-    
-    
+    DefaultListModel listaProd = new DefaultListModel(); 
 
    public ListarProductos() {
         initComponents();
-        
         this.ProductosCategoria();
-        
         this.Lista_productos.setModel(listaProd);
+        ProdSelec.setVisible(false);
+
         
         this.setLocationRelativeTo(null);
     }
@@ -38,13 +34,10 @@ public class ListarProductos extends javax.swing.JFrame {
        String nombre = cc.getCategoria();
        ArrayList pro = new ArrayList();
        pro = ctrlp.verProductosPorCategoria(nombre);
-       
        Iterator it = pro.iterator();
-       
        while (it.hasNext()) {
            String producto = (String)it.next();
-           listaProd.addElement(producto);
-           
+           listaProd.addElement(producto); 
        }
        Lista_productos.setModel(listaProd);
  }
@@ -59,7 +52,7 @@ public class ListarProductos extends javax.swing.JFrame {
         Modificar = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         Lista_productos = new javax.swing.JList();
-        jLabel1 = new javax.swing.JLabel();
+        ProdSelec = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Productos de la categoria seleccionada");
@@ -91,6 +84,11 @@ public class ListarProductos extends javax.swing.JFrame {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
             public int getSize() { return strings.length; }
             public Object getElementAt(int i) { return strings[i]; }
+        });
+        Lista_productos.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                Lista_productosMouseClicked(evt);
+            }
         });
         Lista_productos.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
             public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
@@ -128,7 +126,7 @@ public class ListarProductos extends javax.swing.JFrame {
                 .addContainerGap(21, Short.MAX_VALUE))
         );
 
-        jLabel1.setText("jLabel1");
+        ProdSelec.setText("jLabel1");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -139,7 +137,7 @@ public class ListarProductos extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(10, 10, 10)
-                        .addComponent(jLabel1))
+                        .addComponent(ProdSelec))
                     .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -149,7 +147,7 @@ public class ListarProductos extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
-                .addComponent(jLabel1)
+                .addComponent(ProdSelec)
                 .addContainerGap())
         );
 
@@ -158,6 +156,7 @@ public class ListarProductos extends javax.swing.JFrame {
 
     private void VerInformacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VerInformacionActionPerformed
         InformacionProducto ip = new InformacionProducto();
+        ip.infProd.setText(ProdSelec.getText());
         ip.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_VerInformacionActionPerformed
@@ -168,22 +167,19 @@ public class ListarProductos extends javax.swing.JFrame {
 
     private void ModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ModificarActionPerformed
         ModificarProducto mp = new ModificarProducto();
+        mp.modprod.setText(ProdSelec.getText());
         mp.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_ModificarActionPerformed
 
     private void Lista_productosValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_Lista_productosValueChanged
-        if (!evt.getValueIsAdjusting()) {
-            try {
-                int pselec = this.Lista_productos.getSelectedIndex();
-                refprod = (int)Catprod.get(pselec);
-                //botones de opcion> ver informacion o modificar producto
-                //.........
-            }catch(Exception ex) {
-                 System.out.println("error cat"+ex.toString());
-            }
-        }
+     
     }//GEN-LAST:event_Lista_productosValueChanged
+
+    private void Lista_productosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Lista_productosMouseClicked
+        String in = Lista_productos.getSelectedValue().toString();
+        ProdSelec.setText(in);
+    }//GEN-LAST:event_Lista_productosMouseClicked
 
     /**
      * @param args the command line arguments
@@ -224,8 +220,8 @@ public class ListarProductos extends javax.swing.JFrame {
     private javax.swing.JButton Cancelar;
     private javax.swing.JList Lista_productos;
     private javax.swing.JButton Modificar;
+    public javax.swing.JLabel ProdSelec;
     private javax.swing.JButton VerInformacion;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane2;
     // End of variables declaration//GEN-END:variables

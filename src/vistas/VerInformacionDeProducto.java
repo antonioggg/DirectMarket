@@ -1,29 +1,26 @@
 
 package Vistas;
 
-import Logica.CatHija;
-import Logica.CatPadre;
-import Logica.CtrlCategoria;
+import Logica.*;
 import conexion.buscar;
+import conexion.listar;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
-import javax.swing.tree.TreePath;
+
 
 public class VerInformacionDeProducto extends javax.swing.JFrame {
     
     buscar bu = new buscar();    
+    listar lis = new listar();
     DefaultTreeModel arbol_categorias;
     DefaultMutableTreeNode root = new DefaultMutableTreeNode("Categorias");
-    
-    
     
     public VerInformacionDeProducto() {
         initComponents();
         this.cargarCategorias();
-        
-        
+       
         this.setLocationRelativeTo(null);
     }
     
@@ -142,24 +139,36 @@ public class VerInformacionDeProducto extends javax.swing.JFrame {
 
     private void catArbolValueChanged(javax.swing.event.TreeSelectionEvent evt) {//GEN-FIRST:event_catArbolValueChanged
          DefaultMutableTreeNode def=(DefaultMutableTreeNode)catArbol.getLastSelectedPathComponent();
-        if(def==null){return;}
+        if(def==null){
+            return; }
         if(def.getLevel()==0){
-            return;
-        }
+            return; }
         else{
             try{
                 CatHija prod=(CatHija)def.getUserObject();
-//                JOptionPane.showMessageDialog(null,"aca "+ prod.getNombre());
-                CtrlCategoria cc = CtrlCategoria.getInstance();
-                cc.setCategoria(prod.getNombre());
-                this.setVisible(false);
-                ListarProductos view;
-                view = new ListarProductos();
-                view.setVisible(true);
-                }catch(Exception ex)
-                { CatPadre prod=(CatPadre)def.getUserObject();
+                if (lis.getListaProductosCat(prod.getNombre()).size()>0){
+                    CtrlCategoria cc = CtrlCategoria.getInstance();
+                    cc.setCategoria(prod.getNombre());
+                    this.dispose();
+                    ListarProductos view;
+                    view = new ListarProductos();
+                    view.setVisible(true); }
+                else { 
+                    JOptionPane.showMessageDialog(null, "La categoria no contiene productos"); 
                     }
-            
+                }catch(Exception ex) { 
+                CatPadre prod=(CatPadre)def.getUserObject();
+                if (lis.getListaProductosCat(prod.getNombre()).size()>0) {
+                    CtrlCategoria cc = CtrlCategoria.getInstance();
+                    cc.setCategoria(prod.getNombre());
+                    this.dispose();
+                    ListarProductos view;
+                    view = new ListarProductos();
+                    view.setVisible(true); }
+                else {
+                    JOptionPane.showMessageDialog(null, "La categoria no contiene productos");
+                }
+          }
         }
     }//GEN-LAST:event_catArbolValueChanged
 

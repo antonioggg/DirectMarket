@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 
 package conexion;
 
@@ -21,8 +16,7 @@ public class conectar {
             Class.forName("org.sqlite.JDBC");
             conexion=DriverManager.getConnection("jdbc:sqlite:C:/Documents and Settings/Administrador/Escritorio/directmarket.db");
             sentencia=conexion.createStatement();
-            
-        } catch (ClassNotFoundException ex) {
+            } catch (ClassNotFoundException ex) {
             Logger.getLogger(conectar.class.getName()).log(Level.SEVERE, null, ex);
             JOptionPane.showMessageDialog(null,"Error carga de driver");
         } catch (SQLException ex) {
@@ -42,8 +36,7 @@ public class conectar {
                 conexion.close();
             }
         }
-        catch (SQLException ex){
-          
+        catch (SQLException ex){ 
         }
     }
      

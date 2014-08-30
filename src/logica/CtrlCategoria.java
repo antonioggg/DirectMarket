@@ -9,8 +9,27 @@ import java.util.LinkedList;
 
 //@author Francis
 
-public class CtrlCategoria {    
+public class CtrlCategoria {
+    
+    public String categoria;
 
+    public String getCategoria() {
+        return categoria;
+    }
+
+    public void setCategoria(String categoria) {
+        this.categoria = categoria;
+    }
+    private CtrlCategoria(){
+        this.categoria = "";
+    }
+    
+    private static CtrlCategoria instance = new CtrlCategoria();
+    
+    public static CtrlCategoria getInstance(){
+        return instance;
+    }
+    
     public void altacategoria(String nom){
         Categoria cat;
         String hija="CatHija";
@@ -29,7 +48,5 @@ public boolean existeC(String nom){
         buscar cat= new buscar();
         return cat.findCat(nom);
      }
-
-
-    
 }
+

@@ -1,28 +1,53 @@
 
 package Vistas;
 
+import Logica.CtrlCategoria;
+import Logica.CtrlProductos;
+import Logica.Productos;
 import conexion.buscar;
 import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.Iterator;
 import javax.swing.DefaultListModel;
+import javax.swing.JOptionPane;
 
 public class ListarProductos extends javax.swing.JFrame {
-    
+   
     buscar bu = new buscar();
     ResultSet rs;
-    DefaultListModel modeloLista = new DefaultListModel();
+    CtrlProductos ctrlp = new CtrlProductos();
+    ArrayList Catprod = new ArrayList();
+    DefaultListModel listaProd = new DefaultListModel();
+    
+    private int refprod;
+    
     
 
    public ListarProductos() {
         initComponents();
-        ProductosCategoria();
+        
+        this.ProductosCategoria();
+        
+        this.Lista_productos.setModel(listaProd);
         
         this.setLocationRelativeTo(null);
     }
 
-   public void ProductosCategoria() {
-       jList1.setModel(modeloLista);
-       rs = bu.ProductosPorCategoria("nombre");
-   }
+   private void ProductosCategoria() {
+       CtrlCategoria cc = CtrlCategoria.getInstance(); 
+       String nombre = cc.getCategoria();
+       ArrayList pro = new ArrayList();
+       pro = ctrlp.verProductosPorCategoria(nombre);
+       
+       Iterator it = pro.iterator();
+       
+       while (it.hasNext()) {
+           String producto = (String)it.next();
+           listaProd.addElement(producto);
+           
+       }
+       Lista_productos.setModel(listaProd);
+ }
    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -33,7 +58,8 @@ public class ListarProductos extends javax.swing.JFrame {
         Cancelar = new javax.swing.JButton();
         Modificar = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jList1 = new javax.swing.JList();
+        Lista_productos = new javax.swing.JList();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Productos de la categoria seleccionada");
@@ -61,23 +87,27 @@ public class ListarProductos extends javax.swing.JFrame {
             }
         });
 
-        jList1.setModel(new javax.swing.AbstractListModel() {
+        Lista_productos.setModel(new javax.swing.AbstractListModel() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
             public int getSize() { return strings.length; }
             public Object getElementAt(int i) { return strings[i]; }
         });
-        jScrollPane2.setViewportView(jList1);
+        Lista_productos.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
+                Lista_productosValueChanged(evt);
+            }
+        });
+        jScrollPane2.setViewportView(Lista_productos);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap(15, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(39, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 333, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 279, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(24, 24, 24)
                         .addComponent(VerInformacion)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(Modificar, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -88,9 +118,9 @@ public class ListarProductos extends javax.swing.JFrame {
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(21, 21, 21)
+                .addGap(22, 22, 22)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(37, 37, 37)
+                .addGap(36, 36, 36)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Cancelar)
                     .addComponent(Modificar)
@@ -98,13 +128,19 @@ public class ListarProductos extends javax.swing.JFrame {
                 .addContainerGap(21, Short.MAX_VALUE))
         );
 
+        jLabel1.setText("jLabel1");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addComponent(jLabel1))
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -112,7 +148,9 @@ public class ListarProductos extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
+                .addComponent(jLabel1)
+                .addContainerGap())
         );
 
         pack();
@@ -133,6 +171,19 @@ public class ListarProductos extends javax.swing.JFrame {
         mp.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_ModificarActionPerformed
+
+    private void Lista_productosValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_Lista_productosValueChanged
+        if (!evt.getValueIsAdjusting()) {
+            try {
+                int pselec = this.Lista_productos.getSelectedIndex();
+                refprod = (int)Catprod.get(pselec);
+                //botones de opcion> ver informacion o modificar producto
+                //.........
+            }catch(Exception ex) {
+                 System.out.println("error cat"+ex.toString());
+            }
+        }
+    }//GEN-LAST:event_Lista_productosValueChanged
 
     /**
      * @param args the command line arguments
@@ -171,9 +222,10 @@ public class ListarProductos extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Cancelar;
+    private javax.swing.JList Lista_productos;
     private javax.swing.JButton Modificar;
     private javax.swing.JButton VerInformacion;
-    private javax.swing.JList jList1;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane2;
     // End of variables declaration//GEN-END:variables

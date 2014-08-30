@@ -6,11 +6,14 @@
 
 package conexion;
 import Logica.*;
+import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -19,6 +22,7 @@ import java.util.logging.Logger;
 public class buscar {
     conexion.conectar bd=new conexion.conectar();
     String sql="";
+    
     public ResultSet mostrarOrdenesCompra(){
     bd.conectarBase();
     sql="SELECT * FROM ordencompra";
@@ -148,16 +152,26 @@ public class buscar {
        }
       
   //muestras los productos de una determinada categoria
-       public ResultSet ProductosPorCategoria(String nombre){
-        bd.conectarBase();
-        sql = "SELECT DISTINCT Productos.nombre FROM Productos, categoriaproducto, categoria" +
-                "WHERE idcategoria = " +nombre+ " AND categoriaproducto.refproducto = Productos.referencia";
+        public ArrayList ProductosPorCategoria(String nombre) throws SQLException{
+            bd.conectarBase();
+            sql = "SELECT Productos.nombre FROM Productos, categoriaproducto WHERE categoriaproducto.refproducto = Productos.referencia AND categoriaproducto.idcategoria = '" +nombre+ "'";
+            ArrayList lista = new ArrayList();
+            
+             
             try {
-            bd.resultado=bd.sentencia.executeQuery(sql);
-         } catch (SQLException ex) {
-            Logger.getLogger(buscar.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    return bd.resultado;
-    
+        bd.resultado=bd.sentencia.executeQuery(sql);
+//        JOptionPane.showMessageDialog(null, "Llego hasta aca 1"+bd.resultado.getObject(1).toString());
+               while(bd.resultado.next()){
+               lista.add(bd.resultado.getString("nombre")); 
+               
+               
+               } 
+               
+              
+               
+                } catch (SQLException ex) {
+                Logger.getLogger(buscar.class.getName()).log(Level.SEVERE, null, ex);
+                }
+        return lista;  
     }  
 }

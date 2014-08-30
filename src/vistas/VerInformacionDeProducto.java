@@ -3,6 +3,7 @@ package Vistas;
 
 import Logica.CatHija;
 import Logica.CatPadre;
+import Logica.CtrlCategoria;
 import conexion.buscar;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
@@ -16,29 +17,31 @@ public class VerInformacionDeProducto extends javax.swing.JFrame {
     DefaultTreeModel arbol_categorias;
     DefaultMutableTreeNode root = new DefaultMutableTreeNode("Categorias");
     
-
+    
+    
     public VerInformacionDeProducto() {
         initComponents();
-        cargarCategorias();
+        this.cargarCategorias();
+        
         
         this.setLocationRelativeTo(null);
     }
     
-    public void cargarCategorias() {
+    private void cargarCategorias() {
         ArrayList<CatPadre> cate = bu.categoriaPadre();
         for (CatPadre Categ:cate) {
             DefaultMutableTreeNode cat = new DefaultMutableTreeNode();
             String nom = Categ.getNombre();
             cat.setUserObject(Categ);
             root.add(cat);
-            traerCategoriasHijas(cat, nom);
+            this.traerCategoriasHijas(cat, nom);
             }
         arbol_categorias = new DefaultTreeModel(root);
         catArbol.setModel(arbol_categorias);
         catArbol.setVisible(true);
     }
     
-    public void traerCategoriasHijas(DefaultMutableTreeNode nodo, String pad){
+    private void traerCategoriasHijas(DefaultMutableTreeNode nodo, String pad){
         ArrayList<CatHija> catego = bu.categoriasHijas(pad); 
         if(catego.size()>0){
             for(CatHija Ca: catego){
@@ -56,10 +59,13 @@ public class VerInformacionDeProducto extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jLabel1 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         catArbol = new javax.swing.JTree();
         Cancelar = new javax.swing.JButton();
+
+        jLabel1.setText("jLabel1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Listar categorías");
@@ -69,6 +75,11 @@ public class VerInformacionDeProducto extends javax.swing.JFrame {
         catArbol.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 catArbolMouseClicked(evt);
+            }
+        });
+        catArbol.addTreeSelectionListener(new javax.swing.event.TreeSelectionListener() {
+            public void valueChanged(javax.swing.event.TreeSelectionEvent evt) {
+                catArbolValueChanged(evt);
             }
         });
         jScrollPane1.setViewportView(catArbol);
@@ -88,7 +99,7 @@ public class VerInformacionDeProducto extends javax.swing.JFrame {
                 .addContainerGap(14, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 258, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Cancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(Cancelar))
                 .addGap(20, 20, 20))
         );
         jPanel1Layout.setVerticalGroup(
@@ -126,15 +137,31 @@ public class VerInformacionDeProducto extends javax.swing.JFrame {
     }//GEN-LAST:event_CancelarActionPerformed
 
     private void catArbolMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_catArbolMouseClicked
-        DefaultMutableTreeNode root = null;
-        TreePath parentPath = catArbol.getAnchorSelectionPath();
-        root = (DefaultMutableTreeNode) (parentPath.getLastPathComponent());
-        if (root.isLeaf()) {
-             ListarProductos lp = new ListarProductos();
-             lp.setVisible(true);
-             this.dispose();
-             }
+       
     }//GEN-LAST:event_catArbolMouseClicked
+
+    private void catArbolValueChanged(javax.swing.event.TreeSelectionEvent evt) {//GEN-FIRST:event_catArbolValueChanged
+         DefaultMutableTreeNode def=(DefaultMutableTreeNode)catArbol.getLastSelectedPathComponent();
+        if(def==null){return;}
+        if(def.getLevel()==0){
+            return;
+        }
+        else{
+            try{
+                CatHija prod=(CatHija)def.getUserObject();
+//                JOptionPane.showMessageDialog(null,"aca "+ prod.getNombre());
+                CtrlCategoria cc = CtrlCategoria.getInstance();
+                cc.setCategoria(prod.getNombre());
+                this.setVisible(false);
+                ListarProductos view;
+                view = new ListarProductos();
+                view.setVisible(true);
+                }catch(Exception ex)
+                { CatPadre prod=(CatPadre)def.getUserObject();
+                    }
+            
+        }
+    }//GEN-LAST:event_catArbolValueChanged
 
     
     public static void main(String args[]) {
@@ -172,6 +199,7 @@ public class VerInformacionDeProducto extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Cancelar;
     private javax.swing.JTree catArbol;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables

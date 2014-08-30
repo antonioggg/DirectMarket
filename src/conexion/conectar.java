@@ -11,13 +11,15 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 public class conectar {
+    
    public ResultSet resultado;
    public Statement sentencia;
-  public Connection conexion;
+   public Connection conexion;
+   
     public void conectarBase(){
         try {
             Class.forName("org.sqlite.JDBC");
-            conexion=DriverManager.getConnection("jdbc:sqlite:C:/Documents and Settings/Admin/Escritorio/directmarket.db");
+            conexion=DriverManager.getConnection("jdbc:sqlite:C:/Documents and Settings/Administrador/Escritorio/directmarket.db");
             sentencia=conexion.createStatement();
             
         } catch (ClassNotFoundException ex) {
@@ -27,7 +29,7 @@ public class conectar {
             Logger.getLogger(conectar.class.getName()).log(Level.SEVERE, null, ex);
             JOptionPane.showMessageDialog(null,"Error creacion de statement");
         }
-
+       
     }
      public void desconectarBaseDeDatos(){
         //metodo de desconexion

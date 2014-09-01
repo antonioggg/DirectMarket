@@ -39,8 +39,8 @@ public class buscar {
     }
     
      //mostrar precio unitario
-     public Productos mostrarPrecioUnitario(String prod){
-          Productos pro =new Productos();
+    public Productos mostrarPrecioUnitario(String prod){
+        Productos pro =new Productos();
         bd.conectarBase();
         sql="SELECT * FROM Productos WHERE referencia='"+prod+"'";
         try {
@@ -149,7 +149,55 @@ public class buscar {
             } 
             } catch (SQLException ex) {
                 Logger.getLogger(buscar.class.getName()).log(Level.SEVERE, null, ex);
-                }
+            }
+            bd.desconectarBaseDeDatos();
+
     return lista;  
     }  
+    
+    public ResultSet mostrarCategoriasP(){
+        
+    bd.conectarBase();
+    int a = 1;
+   
+    sql="SELECT * FROM categoria WHERE prod='"+a+"'";
+        try {
+            bd.resultado=bd.sentencia.executeQuery(sql);
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(buscar.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    return bd.resultado;
+    }
+
+    public String getprodref(String selected) {
+        bd.conectarBase();
+        String refprod=null;
+        sql="SELECT referencia FROM Productos WHERE Nombre='"+selected+"'";
+        try {
+            bd.resultado=bd.sentencia.executeQuery(sql);
+            refprod = bd.resultado.getString("referencia");
+        } catch (SQLException ex) {
+            Logger.getLogger(buscar.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        bd.desconectarBaseDeDatos();
+
+        return refprod;
+    }
+    
+    public Double getprecioxprod (String refprod){
+        bd.conectarBase();
+        Double precio=0.0;
+        sql="SELECT precio FROM Productos WHERE referencia='"+refprod+"'";
+        try {
+            bd.resultado=bd.sentencia.executeQuery(sql);
+            precio = bd.resultado.getDouble("precio");
+        } catch (SQLException ex) {
+            Logger.getLogger(buscar.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        bd.desconectarBaseDeDatos();
+
+        return precio;
+    }
+    
 }

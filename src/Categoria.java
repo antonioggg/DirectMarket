@@ -6,6 +6,6 @@ import java.util.Date;
 
 public abstract class Categoria {
   
-     String nombre;
-  
+    public String nombre;
+    
 }

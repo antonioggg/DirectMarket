@@ -18,9 +18,9 @@ import javax.swing.JOptionPane;
 //@author Francis
  
 public class CtrlProductos {
-    
-   public ArrayList verProductosPorCategoria (String nombre){
-      buscar bu = new buscar();
+    buscar bu = new buscar();
+    public ArrayList verProductosPorCategoria (String nombre){
+      
       ArrayList pro = new ArrayList();
        try {
            pro = (ArrayList)bu.ProductosPorCategoria(nombre);
@@ -34,6 +34,13 @@ public class CtrlProductos {
        }
       return pro;
     } 
+
+  
+
+    public String getrefprod(String selected) {
+        String prodref = bu.getprodref(selected);
+        return prodref;
+    }
         
     
     

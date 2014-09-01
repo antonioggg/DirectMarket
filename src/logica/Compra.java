@@ -7,7 +7,20 @@ public class Compra {
     
     //Atributos
     private Integer cantidad;
-    
+    private String refprod;
+
+    public Compra(Integer cantidad, String refprod) {
+        this.cantidad = cantidad;
+        this.refprod = refprod;
+    }
+
+    public String getRefprod() {
+        return refprod;
+    }
+
+    public void setRefprod(String refprod) {
+        this.refprod = refprod;
+    }
      //Funciones 
     public Compra(){
         cantidad = new Integer(0);  

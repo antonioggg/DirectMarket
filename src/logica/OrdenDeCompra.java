@@ -18,6 +18,8 @@ public class OrdenDeCompra {
     private double preciototal;
     private Integer numero;
     private DataFecha fecha;
+    private String hora;
+    
 
     public OrdenDeCompra(double preciototal, Integer numero, DataFecha fecha) {
         this.preciototal = preciototal;

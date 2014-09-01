@@ -30,6 +30,7 @@ public class listar {
         catch (Exception e){
             Logger.getLogger(buscar.class.getName()).log(Level.SEVERE, null, e);
         }
+        bd.desconectarBaseDeDatos();
         return listaClientes;
     }
     public LinkedList<OrdenDeCompra> getCompras(String nick) {
@@ -50,7 +51,7 @@ public class listar {
                     listaCompras.add(comp);
                 }
          
-            bd.desconectarBaseDeDatos();
+        bd.desconectarBaseDeDatos();
         }
         catch (Exception e){
             Logger.getLogger(buscar.class.getName()).log(Level.SEVERE, null, e);
@@ -73,7 +74,7 @@ public class listar {
                     listaProveedores.add(prov);
                 }
          
-            bd.desconectarBaseDeDatos();
+        bd.desconectarBaseDeDatos();
         }
         catch (Exception e){
             Logger.getLogger(buscar.class.getName()).log(Level.SEVERE, null, e);
@@ -97,6 +98,7 @@ public class listar {
         catch (Exception e){
             Logger.getLogger(buscar.class.getName()).log(Level.SEVERE, null, e);
         }
+        bd.desconectarBaseDeDatos();
         return listaProductoCat;
     }
     

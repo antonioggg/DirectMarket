@@ -27,6 +27,7 @@ public class GenerarOrdenCompra extends javax.swing.JFrame {
         LinkedList<OrdenDeCompra> ordenCompra= new LinkedList();
         LinkedList<Object> compras= new LinkedList();
         DefaultTableModel datos;
+        
        
         String value;
         String value2;
@@ -37,7 +38,7 @@ public class GenerarOrdenCompra extends javax.swing.JFrame {
         ArrayList Catprod = new ArrayList();
         DefaultListModel listaProd = new DefaultListModel();
         int refprod;
-    
+        String selected=null;
      
     
         
@@ -332,31 +333,26 @@ public class GenerarOrdenCompra extends javax.swing.JFrame {
     }//GEN-LAST:event_mitablaMouseClicked
 
     private void Lista_productosValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_Lista_productosValueChanged
-        if (!evt.getValueIsAdjusting()) {
-            try {
-                int pselec = this.Lista_productos.getSelectedIndex();
-                refprod = (int) Catprod.get(pselec);
-                //botones de opcion> ver informacion o modificar producto
-                //.........
-            }catch(Exception ex) {
-                System.out.println("error cat"+ex.toString());
-            }
-        }
+     
     }//GEN-LAST:event_Lista_productosValueChanged
 
     private void Lista_productosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Lista_productosMouseClicked
-
-        // TODO add your handling code here:
+        
+        
+        
     }//GEN-LAST:event_Lista_productosMouseClicked
 
     private void agregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarActionPerformed
         // Agregar producto a la lista
-        String selected = Lista_productos.getSelectedValue().toString();
-        
-        String refp = ctrlp.getrefprod(selected);
-        int cant = Integer.getInteger(cantprod.getText());
-       
-        Compra nuevacompra = new Compra(cant, refp);
+        selected = Lista_productos.getSelectedValue().toString();
+        //System.out.println(" producto "+selected);
+        String refp = bu.getprodref(selected);
+        //System.out.print("referencia de producto "+refp);
+        String cant = cantprod.getText();
+        Integer cantp = Integer.parseInt(cant);
+        Compra nuevacompra = new Compra();
+        nuevacompra.setCantidad(cantp);
+        nuevacompra.setRefprod(refp);
         compras.add(nuevacompra);
     
     }//GEN-LAST:event_agregarActionPerformed

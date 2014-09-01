@@ -14,7 +14,7 @@ public class conectar {
     public void conectarBase(){
         try {
             Class.forName("org.sqlite.JDBC");
-            conexion=DriverManager.getConnection("jdbc:sqlite:C:/Users/yo/Documents/NetBeansProjects/directmarket.db");
+            conexion=DriverManager.getConnection("jdbc:sqlite:C:/Documents and Settings/Admin/Mis documentos/NetBeansProjects/directmarket.db");
             sentencia=conexion.createStatement();
             } catch (ClassNotFoundException ex) {
             Logger.getLogger(conectar.class.getName()).log(Level.SEVERE, null, ex);

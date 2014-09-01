@@ -23,7 +23,9 @@ public class buscar {
         } catch (SQLException ex) {
             Logger.getLogger(buscar.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
     return bd.resultado;
+    
     }
     
     //mostrar compras
@@ -50,11 +52,14 @@ public class buscar {
                pro.setPrecio(bd.resultado.getDouble("precio"));
                pro.setProvedor(bd.resultado.getString("Proveedor"));
                pro.setReferencia(bd.resultado.getString("referencia"));
+               
            }
         } catch (SQLException ex) {
             Logger.getLogger(buscar.class.getName()).log(Level.SEVERE, null, ex);
         }
+        bd.desconectarBaseDeDatos();
     return pro;
+    
     }
       
      //existe nick
@@ -72,6 +77,7 @@ public class buscar {
         } catch (SQLException ex) {
             Logger.getLogger(buscar.class.getName()).log(Level.SEVERE, null, ex);
         }
+        bd.desconectarBaseDeDatos();
      return si;
      }
       
@@ -92,6 +98,7 @@ public class buscar {
             } catch (SQLException ex) {
             Logger.getLogger(buscar.class.getName()).log(Level.SEVERE, null, ex);
         }
+        bd.desconectarBaseDeDatos();
       return si;
       }
     
@@ -116,8 +123,9 @@ public class buscar {
         } catch (SQLException ex) {
             Logger.getLogger(buscar.class.getName()).log(Level.SEVERE, null, ex);
         }  
+        bd.desconectarBaseDeDatos();
     return cate; 
-       }
+    }
        
     //Categoria hija
     public ArrayList<CatHija> categoriasHijas(String pad){
@@ -134,13 +142,14 @@ public class buscar {
           } catch (SQLException ex) {
             Logger.getLogger(buscar.class.getName()).log(Level.SEVERE, null, ex);
         }
+        bd.desconectarBaseDeDatos();
     return categ;  
    }
       
   //muestras los productos de una determinada categoria
     public ArrayList ProductosPorCategoria(String nombre) throws SQLException{
     bd.conectarBase();
-    sql = "SELECT Productos.nombre FROM Productos, categoriaproducto WHERE categoriaproducto.refproducto = Productos.referencia AND categoriaproducto.idcategoria = '" +nombre+ "'";
+    sql = "SELECT Productos.nombre FROM Productos, categoriaproducto WHERE categoriaproducto.idproducto = Productos.numero AND categoriaproducto.idcategoria = '" +nombre+ "'";
     ArrayList lista = new ArrayList(); 
         try {
             bd.resultado=bd.sentencia.executeQuery(sql);
@@ -150,8 +159,8 @@ public class buscar {
             } catch (SQLException ex) {
                 Logger.getLogger(buscar.class.getName()).log(Level.SEVERE, null, ex);
             }
-            bd.desconectarBaseDeDatos();
-
+           
+       
     return lista;  
     }  
     
@@ -167,16 +176,17 @@ public class buscar {
         } catch (SQLException ex) {
             Logger.getLogger(buscar.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
     return bd.resultado;
     }
 
     public String getprodref(String selected) {
         bd.conectarBase();
         String refprod=null;
-        sql="SELECT referencia FROM Productos WHERE Nombre='"+selected+"'";
+        sql="SELECT * FROM Productos where Nombre ='"+selected+"'";
         try {
             bd.resultado=bd.sentencia.executeQuery(sql);
-            refprod = bd.resultado.getString("referencia");
+            refprod = bd.resultado.getString("numero");
         } catch (SQLException ex) {
             Logger.getLogger(buscar.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -188,15 +198,15 @@ public class buscar {
     public Double getprecioxprod (String refprod){
         bd.conectarBase();
         Double precio=0.0;
-        sql="SELECT precio FROM Productos WHERE referencia='"+refprod+"'";
+        sql="SELECT precio FROM Productos WHERE numero='"+refprod+"'";
         try {
             bd.resultado=bd.sentencia.executeQuery(sql);
             precio = bd.resultado.getDouble("precio");
         } catch (SQLException ex) {
             Logger.getLogger(buscar.class.getName()).log(Level.SEVERE, null, ex);
         }
+   
         bd.desconectarBaseDeDatos();
-
         return precio;
     }
     
